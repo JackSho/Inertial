@@ -1,0 +1,9 @@
+ui_*.h
+moc_*.cpp
+moc_*.h
+*.build
+*.xcuserdatad
+Debug
+Release
+Index/DataStore
+Build/

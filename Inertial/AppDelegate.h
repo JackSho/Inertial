@@ -10,6 +10,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+-(void) PostMouseEventButton: (CGMouseButton) button Type: (CGEventType) type Point: (const CGPoint *) point Count: (int64_t) clickCount;
 
 @end
 
