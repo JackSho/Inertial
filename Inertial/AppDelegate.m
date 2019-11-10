@@ -37,6 +37,7 @@ int mouseStatus = INERTIAL_MOUSE_STATUS_UNKNOW;
 int inertialCount = INERTIAL_COUNT_ZERO;
 CGPoint inertialStartPoint, lastPoint, currentPoint;
 CGEventTimestamp lastTimestamp, currentTimestamp;
+NSSize displayPixelSize;
 double mouseMoveSpeed;
 bool enableInertial;
 bool autoInertial;
@@ -152,6 +153,20 @@ double inertialOffsetY = 0.0; // 惯性移动的垂直位移
     CGEventTapEnable(eventTap, true);
     CFRelease(eventTap);
     CFRelease(runLoopSource);
+    
+    // 获取屏幕尺寸
+    NSScreen *screen = [NSScreen mainScreen];
+    NSDictionary *description = [screen deviceDescription];
+    displayPixelSize = [[description objectForKey:NSDeviceSize] sizeValue];
+//    NSLog(@"main screen size: [%f, %f]", displayPixelSize.width, displayPixelSize.height);
+}
+
+
+- (void) applicationDidChangeScreenParameters:(NSNotification *)notification {
+    NSScreen *screen = [NSScreen mainScreen];
+    NSDictionary *description = [screen deviceDescription];
+    displayPixelSize = [[description objectForKey:NSDeviceSize] sizeValue];
+//    NSLog(@"applicationDidChangeScreenParameters triggered, screen size: [%f, %f]", displayPixelSize.width, displayPixelSize.height);
 }
 
 
